@@ -1,0 +1,28 @@
+﻿from collections import deque
+
+def water_jug():
+    visited = set()
+    queue = deque([(0, 0)])   # (jug1, jug2)
+
+    while queue:
+        a, b = queue.popleft()
+
+        if (a, b) in visited:
+            continue
+        visited.add((a, b))
+
+        if a == 2:
+            print("Solution found:", (a, b))
+            return
+
+        # All possible operations
+        queue.extend([
+            (4, b),        # Fill jug1
+            (a, 3),        # Fill jug2
+            (0, b),        # Empty jug1
+            (a, 0),        # Empty jug2
+            (min(a+b, 4), max(0, a+b-4)),  # Pour jug2 → jug1
+            (max(0, a+b-3), min(a+b, 3))   # Pour jug1 → jug2
+        ])
+
+water_jug()
