@@ -1,0 +1,30 @@
+% Facts (Initial Knowledge Base)
+
+fact(fever).
+fact(cough).
+fact(chills).
+
+% Rules
+
+rule(flu) :-
+    fact(fever),
+    fact(cough).
+
+rule(malaria) :-
+    fact(fever),
+    fact(chills).
+
+rule(cold) :-
+    fact(cough).
+
+% Forward Chaining Inference
+
+
+forward_chain :-
+    rule(Disease),
+    write('Inferred Disease: '),
+    write(Disease),
+    nl,
+    fail.
+
+forward_chain.
